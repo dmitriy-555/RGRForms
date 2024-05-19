@@ -1,0 +1,12 @@
+152634 Borisov Boris Dynamo 8 7 15 
+263784 Smirnov Sergey Dynamo 11 4 18 
+374895 Kirillov Kirill Dynamo 12 2 22 
+485976 Pavlov Stanislav Dynamo 2 13 11 
+596847 Zaitsev Artem Dynamo 4 12 23 
+614238 Grigoriev Grigory Dynamo 10 3 15 
+725419 Novikov Oleg Dynamo 5 10 14 
+836500 Saveliev Saveliy Dynamo 14 1 19 
+947681 Kuznetsov Dmitry Dynamo 9 6 25 
+158762 Mikhailov Mikhail Dynamo 15 0 21 
+269843 Volkov Igor Dynamo 6 9 17 
+370924 Ivanov Ilya Dynamo 7 8 16 
