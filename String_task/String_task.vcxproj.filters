@@ -27,4 +27,8 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="dynamoInput.txt" />
+    <Text Include="spartakInput.txt" />
+  </ItemGroup>
 </Project>

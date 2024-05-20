@@ -761,19 +761,12 @@ private: System::Void show_dynamo_button_Click(System::Object^ sender, System::E
 private:
 	void remove_entries(std::vector<std::vector<std::string>>& vec, const std::vector<std::string>& ids) {
 		std::vector<std::vector<std::string>> new_vec;
-		bool f = false;
-		for (int i = 0; i < vec.size(); i++) {
-			for (int j = 0; j < ids.size(); j++) {
-				if (vec[i][0] == ids[j]) {
-					f = true;
-					break;
-				}
-			}
-			if (!f) {
-				new_vec.push_back(vec[i]);
+		for (const auto& worker : vec) {
+			if (std::find(ids.begin(), ids.end(), worker[0]) == ids.end()) {
+				new_vec.push_back(worker);
 			}
 			else {
-				f = false;
+				count_rows--;
 			}
 		}
 		vec = new_vec;
@@ -781,10 +774,10 @@ private:
 
 	void write_to_file(const std::string& filename, const std::vector<std::vector<std::string>>& vec) {
 		std::ofstream file(filename);
-		for (size_t i = 0; i < vec.size(); ++i) {
-			if (i == vec.size() - 1) continue;
-			for (size_t j = 0; j < vec[i].size() - 1; ++j) {
-				file << vec[i][j] << " ";
+		for (int i = 0; i < vec.size(); i++) { 
+			for (int j = 0; j < vec[i].size() - 1; j++) {
+				file << vec[i][j];
+				if (j < vec[i].size() - 1) file << " "; // Добавляем пробел, если это не последний элемент строки
 			}
 			file << "\n";
 		}
@@ -800,10 +793,9 @@ private: System::Void delete_worker_Click(System::Object^ sender, System::EventA
 		while (Field_workers->SelectedRows->Count > 0) {
 			buf = Convert::ToString(Field_workers->SelectedRows[0]->Cells[0]->Value);
 			for each (char c in buf) str += c;
-			ids.push_back(str);
+			ids.push_back(str);	
 			str = "";
 			Field_workers->Rows->RemoveAt(Field_workers->SelectedRows[0]->Index);
-			count_rows--;
 		}
 
 		remove_entries(workers, ids);

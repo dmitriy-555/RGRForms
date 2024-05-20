@@ -5,7 +5,11 @@
 596847 Zaitsev Artem Dynamo 4 12 23 
 614238 Grigoriev Grigory Dynamo 10 3 15 
 725419 Novikov Oleg Dynamo 5 10 14 
-836500 Saveliev Saveliy Dynamo 14 1 19 
-947681 Kuznetsov Dmitry Dynamo 9 6 25 
-158762 Mikhailov Mikhail Dynamo 15 0 21 
-269843 Volkov Igor Dynamo 6 9 17 
+836520 Yashin Yuri Dynamo 6 6 12 
+947631 Soloviev Sergey Dynamo 7 5 14 
+105872 Antonov Anton Dynamo 8 4 15 
+116983 Stepanov Stepan Dynamo 9 3 15 
+128094 Korolev Kirill Dynamo 11 2 17 
+139205 Orlov Oleg Dynamo 10 1 16 
+140316 Yegorov Egor Dynamo 12 3 18 
+151427 Kuznetsov Konstantin Dynamo 13 2 19
