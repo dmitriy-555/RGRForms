@@ -23,9 +23,6 @@
     <ClInclude Include="MyForm.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Read_one.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Add_player.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

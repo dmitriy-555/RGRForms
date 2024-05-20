@@ -7,4 +7,3 @@
 778899 Lebedev Vladimir Spartak 15 1 19 
 889900 Semenov Denis Spartak 1 14 24 
 990011 Ivanov Ivan Spartak 10 5 20 
-101122 Sokolov Sergey Spartak 9 8 17 

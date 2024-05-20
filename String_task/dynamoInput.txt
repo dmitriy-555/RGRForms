@@ -9,4 +9,3 @@
 947681 Kuznetsov Dmitry Dynamo 9 6 25 
 158762 Mikhailov Mikhail Dynamo 15 0 21 
 269843 Volkov Igor Dynamo 6 9 17 
-370924 Ivanov Ilya Dynamo 7 8 16 
