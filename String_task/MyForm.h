@@ -54,7 +54,7 @@ namespace Stringtask {
 				count_rows++;
 				all_prod_int = 0;
 			}
-				
+
 
 			file.close();
 			file.open("dynamoInput.txt");
@@ -81,7 +81,7 @@ namespace Stringtask {
 			file.close();
 			workers.insert(workers.end(), spartak.begin(), spartak.end());
 			workers.insert(workers.end(), dynamo.begin(), dynamo.end());
-			
+
 		}
 	protected:
 		/// <summary>
@@ -128,13 +128,13 @@ namespace Stringtask {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ passes_column;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ pentalty_column;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ total_prod;
-	//private: System::Windows::Forms::CheckBox^ checkBox1;
+		   //private: System::Windows::Forms::CheckBox^ checkBox1;
 
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -481,8 +481,9 @@ namespace Stringtask {
 	private: System::Void read_all_Click(System::Object^ sender, System::EventArgs^ e) {
 		isDynamo = 0;
 		isSpartak = 0;
+		int count_rows = 0;
 		Field_workers->Columns->Clear();
-		Field_workers->ColumnCount = 8; Field_workers->RowCount = count_rows;
+		Field_workers->ColumnCount = 8;
 		Field_workers->Columns[0]->Name = "ID"; Field_workers->Columns[0]->Width = 45;
 		Field_workers->Columns[1]->Name = "Фамилия"; Field_workers->Columns[1]->Width = 91;
 		Field_workers->Columns[2]->Name = "Имя"; Field_workers->Columns[2]->Width = 91;
@@ -491,15 +492,22 @@ namespace Stringtask {
 		Field_workers->Columns[5]->Name = "Пассы"; Field_workers->Columns[5]->Width = 91;
 		Field_workers->Columns[6]->Name = "Штрафное"; Field_workers->Columns[6]->Width = 91;
 		Field_workers->Columns[7]->Name = "Общий счёт"; Field_workers->Columns[7]->Width = 91;
-		
 
-
-		for (int i = 0; i < count_rows; i++) {
+		for (std::vector<std::string> player : workers) {
+			Field_workers->RowCount++;
 			for (int j = 0; j < 8; j++) {
-				String^ buf = gcnew String(workers[i][j].c_str());
-				this->Field_workers->Rows[i]->Cells[j]->Value = buf;
+				String^ buf = gcnew String(player[j].c_str());
+				this->Field_workers->Rows[count_rows]->Cells[j]->Value = buf;
 			}
+			count_rows++;
 		}
+
+		//for (int i = 0; i < count_rows; i++) {
+			//for (int j = 0; j < 8; j++) {
+				//String^ buf = gcnew String(workers[i][j].c_str());
+				//this->Field_workers->Rows[i]->Cells[j]->Value = buf;
+			//}
+		//}
 	}
 
 	private: System::Void add_worker_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -562,15 +570,6 @@ namespace Stringtask {
 		workers.insert(workers.end(), dynamo.begin(), dynamo.end());
 	}
 
-	private: System::Void close_button_Click(System::Object^ sender, System::EventArgs^ e) {
-		//std::ofstream file("input.txt");
-		//for (std::vector<std::string> worker : workers) {
-			//for (int i = 0; i < 7; i ++) {
-				//file << worker[i] + " ";
-			//} file << std::endl;
-		//}
-		Application::Exit();
-	}
 
 	private: System::Void id_tb_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		std::string str = "";
@@ -583,17 +582,17 @@ namespace Stringtask {
 			str += c;
 		}
 		if (id_tb->Text != "") {
-		int row = 1;
-		Field_workers->Columns->Clear();
-		Field_workers->ColumnCount = 8; Field_workers->RowCount = row;
-		Field_workers->Columns[0]->Name = "ID"; Field_workers->Columns[0]->Width = 45;
-		Field_workers->Columns[1]->Name = "Фамилия"; Field_workers->Columns[1]->Width = 91;
-		Field_workers->Columns[2]->Name = "Имя"; Field_workers->Columns[2]->Width = 91;
-		Field_workers->Columns[3]->Name = "Команда"; Field_workers->Columns[3]->Width = 91;
-		Field_workers->Columns[4]->Name = "Голы"; Field_workers->Columns[4]->Width = 91;
-		Field_workers->Columns[5]->Name = "Пассы"; Field_workers->Columns[5]->Width = 91;
-		Field_workers->Columns[6]->Name = "Штрафное"; Field_workers->Columns[6]->Width = 91;
-		Field_workers->Columns[7]->Name = "Общий счёт"; Field_workers->Columns[7]->Width = 91;
+			int row = 1;
+			Field_workers->Columns->Clear();
+			Field_workers->ColumnCount = 8; Field_workers->RowCount = row;
+			Field_workers->Columns[0]->Name = "ID"; Field_workers->Columns[0]->Width = 45;
+			Field_workers->Columns[1]->Name = "Фамилия"; Field_workers->Columns[1]->Width = 91;
+			Field_workers->Columns[2]->Name = "Имя"; Field_workers->Columns[2]->Width = 91;
+			Field_workers->Columns[3]->Name = "Команда"; Field_workers->Columns[3]->Width = 91;
+			Field_workers->Columns[4]->Name = "Голы"; Field_workers->Columns[4]->Width = 91;
+			Field_workers->Columns[5]->Name = "Пассы"; Field_workers->Columns[5]->Width = 91;
+			Field_workers->Columns[6]->Name = "Штрафное"; Field_workers->Columns[6]->Width = 91;
+			Field_workers->Columns[7]->Name = "Общий счёт"; Field_workers->Columns[7]->Width = 91;
 			for (std::vector<std::string> worker : workers) {
 				if (worker[0].find(str) != std::string::npos) {
 					row += 1;
@@ -605,7 +604,7 @@ namespace Stringtask {
 				}
 			}
 		}
-			
+
 	}
 
 	private: System::Void surname_tb_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -614,7 +613,7 @@ namespace Stringtask {
 		for each (char c in surname_tb->Text) {
 			if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))) {
 				sur_l->Text = "Неверный ввод!\nДопускаются символы от a до z и от A до Z";
-				return;	
+				return;
 			}
 			str += std::tolower(c);
 		}
@@ -645,19 +644,74 @@ namespace Stringtask {
 				}
 			}
 		}
-		
+
 
 	}
 
-	private: 
+	private:
 		static bool CompareWorkers(std::vector<std::string> a, std::vector<std::string> b) {
 			return stoi(a[7]) > stoi(b[7]);
 		}
-		
+
 		System::Void most_prod_button_Click(System::Object^ sender, System::EventArgs^ e) {
-		int row = 1;
+			int row = 1;
+			Field_workers->Columns->Clear();
+			Field_workers->ColumnCount = 8; Field_workers->RowCount = row;
+			Field_workers->Columns[0]->Name = "ID"; Field_workers->Columns[0]->Width = 45;
+			Field_workers->Columns[1]->Name = "Фамилия"; Field_workers->Columns[1]->Width = 91;
+			Field_workers->Columns[2]->Name = "Имя"; Field_workers->Columns[2]->Width = 91;
+			Field_workers->Columns[3]->Name = "Команда"; Field_workers->Columns[3]->Width = 91;
+			Field_workers->Columns[4]->Name = "Голы"; Field_workers->Columns[4]->Width = 91;
+			Field_workers->Columns[5]->Name = "Пассы"; Field_workers->Columns[5]->Width = 91;
+			Field_workers->Columns[6]->Name = "Штрафное"; Field_workers->Columns[6]->Width = 91;
+			Field_workers->Columns[7]->Name = "Общий счёт"; Field_workers->Columns[7]->Width = 91;
+
+
+			if (isSpartak) {
+				std::vector< std::vector<std::string>> players = spartak;
+				std::sort(players.begin(), players.end(), CompareWorkers);
+				for (int i = 0; i < players.size(); i++) {
+					row += 1;
+					Field_workers->RowCount = row;
+					for (int j = 0; j < 8; j++) {
+						String^ buf = gcnew String(players[i][j].c_str());
+						this->Field_workers->Rows[i]->Cells[j]->Value = buf;
+					}
+				}
+			}
+			else if (isDynamo) {
+				std::vector< std::vector<std::string>> players = dynamo;
+				std::sort(players.begin(), players.end(), CompareWorkers);
+				for (int i = 0; i < players.size(); i++) {
+					row += 1;
+					Field_workers->RowCount = row;
+					for (int j = 0; j < 8; j++) {
+						String^ buf = gcnew String(players[i][j].c_str());
+						this->Field_workers->Rows[i]->Cells[j]->Value = buf;
+					}
+				}
+			}
+			else {
+				std::vector< std::vector<std::string>> players = workers;
+				std::sort(players.begin(), players.end(), CompareWorkers);
+				for (int i = 0; i < players.size(); i++) {
+					row += 1;
+					Field_workers->RowCount = row;
+					for (int j = 0; j < 8; j++) {
+						String^ buf = gcnew String(players[i][j].c_str());
+						this->Field_workers->Rows[i]->Cells[j]->Value = buf;
+					}
+				}
+			}
+		}
+
+	private: System::Void show_spartak_button_Click(System::Object^ sender, System::EventArgs^ e) {
+		isSpartak = 1;
+		isDynamo = 0;
 		Field_workers->Columns->Clear();
-		Field_workers->ColumnCount = 8; Field_workers->RowCount = row;
+		Field_workers->ColumnCount = 8;
+		int count_rows = 0;
+
 		Field_workers->Columns[0]->Name = "ID"; Field_workers->Columns[0]->Width = 45;
 		Field_workers->Columns[1]->Name = "Фамилия"; Field_workers->Columns[1]->Width = 91;
 		Field_workers->Columns[2]->Name = "Имя"; Field_workers->Columns[2]->Width = 91;
@@ -667,144 +721,92 @@ namespace Stringtask {
 		Field_workers->Columns[6]->Name = "Штрафное"; Field_workers->Columns[6]->Width = 91;
 		Field_workers->Columns[7]->Name = "Общий счёт"; Field_workers->Columns[7]->Width = 91;
 
+		for (std::vector<std::string> player : spartak) {
+			Field_workers->RowCount++;
+			for (int j = 0; j < 8; j++) {
+				String^ buf = gcnew String(player[j].c_str());
+				this->Field_workers->Rows[count_rows]->Cells[j]->Value = buf;
+			}
+			count_rows++;
+		}
+	}
 
-		if (isSpartak) {
-			std::vector< std::vector<std::string>> players = spartak;
-			std::sort(players.begin(), players.end(), CompareWorkers);
-			for (int i = 0; i < players.size(); i++) {
-				row += 1;
-				Field_workers->RowCount = row;
-				for (int j = 0; j < 8; j++) {
-					String^ buf = gcnew String(players[i][j].c_str());
-					this->Field_workers->Rows[i]->Cells[j]->Value = buf;
+	private: System::Void show_dynamo_button_Click(System::Object^ sender, System::EventArgs^ e) {
+		isDynamo = 1;
+		isSpartak = 0;
+		Field_workers->Columns->Clear();
+		Field_workers->ColumnCount = 8;
+		int count_rows = 0;
+
+		Field_workers->Columns[0]->Name = "ID"; Field_workers->Columns[0]->Width = 45;
+		Field_workers->Columns[1]->Name = "Фамилия"; Field_workers->Columns[1]->Width = 91;
+		Field_workers->Columns[2]->Name = "Имя"; Field_workers->Columns[2]->Width = 91;
+		Field_workers->Columns[3]->Name = "Команда"; Field_workers->Columns[3]->Width = 91;
+		Field_workers->Columns[4]->Name = "Голы"; Field_workers->Columns[4]->Width = 91;
+		Field_workers->Columns[5]->Name = "Пассы"; Field_workers->Columns[5]->Width = 91;
+		Field_workers->Columns[6]->Name = "Штрафное"; Field_workers->Columns[6]->Width = 91;
+		Field_workers->Columns[7]->Name = "Общий счёт"; Field_workers->Columns[7]->Width = 91;
+
+		for (std::vector<std::string> player : dynamo) {
+			Field_workers->RowCount++;
+			for (int j = 0; j < 8; j++) {
+				String^ buf = gcnew String(player[j].c_str());
+				this->Field_workers->Rows[count_rows]->Cells[j]->Value = buf;
+			}
+			count_rows++;
+		}
+	}
+
+	private:
+		void remove_entries(std::vector<std::vector<std::string>>& vec, const std::vector<std::string>& ids) {
+			std::vector<std::vector<std::string>> new_vec;
+			for (const auto& worker : vec) {
+				if (std::find(ids.begin(), ids.end(), worker[0]) == ids.end()) {
+					new_vec.push_back(worker);
+				}
+				else {
+					count_rows--;
 				}
 			}
+			vec = new_vec;
 		}
-		else if (isDynamo) {
-			std::vector< std::vector<std::string>> players = dynamo;
-			std::sort(players.begin(), players.end(), CompareWorkers);
-			for (int i = 0; i < players.size(); i++) {
-				row += 1;
-				Field_workers->RowCount = row;
-				for (int j = 0; j < 8; j++) {
-					String^ buf = gcnew String(players[i][j].c_str());
-					this->Field_workers->Rows[i]->Cells[j]->Value = buf;
+
+		void write_to_file(const std::string& filename, const std::vector<std::vector<std::string>>& vec) {
+			std::ofstream file(filename);
+			for (int i = 0; i < vec.size(); i++) {
+				for (int j = 0; j < vec[i].size() - 1; j++) {
+					file << vec[i][j];
+					if (j < vec[i].size() - 1) file << " ";
 				}
+				file << "\n";
 			}
+			file.close();
 		}
-		else {
-			std::vector< std::vector<std::string>> players = workers;
-			std::sort(players.begin(), players.end(), CompareWorkers);
-			for (int i = 0; i < players.size(); i++) {
-				row += 1;
-				Field_workers->RowCount = row;
-				for (int j = 0; j < 8; j++) {
-					String^ buf = gcnew String(players[i][j].c_str());
-					this->Field_workers->Rows[i]->Cells[j]->Value = buf;
-				}
+
+	private: System::Void delete_worker_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (Field_workers->SelectedRows->Count > 0) {
+			std::vector<std::string> ids;
+			std::string str;
+			String^ buf;
+
+			while (Field_workers->SelectedRows->Count > 0) {
+				buf = Convert::ToString(Field_workers->SelectedRows[0]->Cells[0]->Value);
+				for each (char c in buf) str += c;
+				ids.push_back(str);
+				str = "";
+				Field_workers->Rows->RemoveAt(Field_workers->SelectedRows[0]->Index);
 			}
+
+			remove_entries(dynamo, ids);
+			remove_entries(spartak, ids);
+			workers.clear();
+			workers.shrink_to_fit();
+			workers.insert(workers.end(), spartak.begin(), spartak.end());
+			workers.insert(workers.end(), dynamo.begin(), dynamo.end());
+
+			write_to_file("dynamoInput.txt", dynamo);
+			write_to_file("spartakInput.txt", spartak);
 		}
 	}
-
-private: System::Void show_spartak_button_Click(System::Object^ sender, System::EventArgs^ e) {
-	isSpartak = 1;
-	isDynamo = 0;
-	Field_workers->Columns->Clear();
-	Field_workers->ColumnCount = 8;
-	int count_rows = 0;
-
-	Field_workers->Columns[0]->Name = "ID"; Field_workers->Columns[0]->Width = 45;
-	Field_workers->Columns[1]->Name = "Фамилия"; Field_workers->Columns[1]->Width = 91;
-	Field_workers->Columns[2]->Name = "Имя"; Field_workers->Columns[2]->Width = 91;
-	Field_workers->Columns[3]->Name = "Команда"; Field_workers->Columns[3]->Width = 91;
-	Field_workers->Columns[4]->Name = "Голы"; Field_workers->Columns[4]->Width = 91;
-	Field_workers->Columns[5]->Name = "Пассы"; Field_workers->Columns[5]->Width = 91;
-	Field_workers->Columns[6]->Name = "Штрафное"; Field_workers->Columns[6]->Width = 91;
-	Field_workers->Columns[7]->Name = "Общий счёт"; Field_workers->Columns[7]->Width = 91;
-
-	for (std::vector<std::string> player : spartak) {
-		Field_workers->RowCount++;
-		for (int j = 0; j < 8; j++) {
-			String^ buf = gcnew String(player[j].c_str());
-			this->Field_workers->Rows[count_rows]->Cells[j]->Value = buf;
-		}
-		count_rows++;
-	}
-}
-
-private: System::Void show_dynamo_button_Click(System::Object^ sender, System::EventArgs^ e) {
-	isDynamo = 1;
-	isSpartak = 0;
-	Field_workers->Columns->Clear();
-	Field_workers->ColumnCount = 8;
-	int count_rows = 0;
-
-	Field_workers->Columns[0]->Name = "ID"; Field_workers->Columns[0]->Width = 45;
-	Field_workers->Columns[1]->Name = "Фамилия"; Field_workers->Columns[1]->Width = 91;
-	Field_workers->Columns[2]->Name = "Имя"; Field_workers->Columns[2]->Width = 91;
-	Field_workers->Columns[3]->Name = "Команда"; Field_workers->Columns[3]->Width = 91;
-	Field_workers->Columns[4]->Name = "Голы"; Field_workers->Columns[4]->Width = 91;
-	Field_workers->Columns[5]->Name = "Пассы"; Field_workers->Columns[5]->Width = 91;
-	Field_workers->Columns[6]->Name = "Штрафное"; Field_workers->Columns[6]->Width = 91;
-	Field_workers->Columns[7]->Name = "Общий счёт"; Field_workers->Columns[7]->Width = 91;
-
-	for (std::vector<std::string> player : dynamo) {
-		Field_workers->RowCount++;
-		for (int j = 0; j < 8; j++) {
-			String^ buf = gcnew String(player[j].c_str());
-			this->Field_workers->Rows[count_rows]->Cells[j]->Value = buf;
-		}
-		count_rows++;
-	}
-}
-
-private:
-	void remove_entries(std::vector<std::vector<std::string>>& vec, const std::vector<std::string>& ids) {
-		std::vector<std::vector<std::string>> new_vec;
-		for (const auto& worker : vec) {
-			if (std::find(ids.begin(), ids.end(), worker[0]) == ids.end()) {
-				new_vec.push_back(worker);
-			}
-			else {
-				count_rows--;
-			}
-		}
-		vec = new_vec;
-	}
-
-	void write_to_file(const std::string& filename, const std::vector<std::vector<std::string>>& vec) {
-		std::ofstream file(filename);
-		for (int i = 0; i < vec.size(); i++) { 
-			for (int j = 0; j < vec[i].size() - 1; j++) {
-				file << vec[i][j];
-				if (j < vec[i].size() - 1) file << " "; // Добавляем пробел, если это не последний элемент строки
-			}
-			file << "\n";
-		}
-		file.close();
-	}
-
-private: System::Void delete_worker_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (Field_workers->SelectedRows->Count > 0) {
-		std::vector<std::string> ids;
-		std::string str;
-		String^ buf;
-
-		while (Field_workers->SelectedRows->Count > 0) {
-			buf = Convert::ToString(Field_workers->SelectedRows[0]->Cells[0]->Value);
-			for each (char c in buf) str += c;
-			ids.push_back(str);	
-			str = "";
-			Field_workers->Rows->RemoveAt(Field_workers->SelectedRows[0]->Index);
-		}
-
-		remove_entries(workers, ids);
-		remove_entries(dynamo, ids);
-		remove_entries(spartak, ids);
-
-		write_to_file("dynamoInput.txt", dynamo);
-		write_to_file("spartakInput.txt", spartak);
-	}
-}
-};
+	};
 }
